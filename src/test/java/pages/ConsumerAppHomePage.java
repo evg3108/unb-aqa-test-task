@@ -8,19 +8,26 @@ import static com.codeborne.selenide.Selectors.*;
 
 public class ConsumerAppHomePage {
 
+    private final String STAGING_URL = "https://www-staging.unbiased.team/";
+    private final String PROD_URL = "https://unbiased.co.uk/";
+
     private SelenideElement cookies = $("[data-cookiefirst-widget='box']");
 
     public ConsumerAppHomePage openPage(){
-        open("https://unbiased.co.uk");
-        if (cookies.isDisplayed()){
-            $("[data-cookiefirst-action='accept']").click();
-        }
+        open(STAGING_URL);
+        closeCookiesBanner();
         return this;
     }
 
     public ConsumerAppMatchEnquiryStartPage clickFIFAButton(){
         $(byXpath("//button[@onclick=\"goToMatchIntroPage('financial-adviser')\"]")).click();
         return new ConsumerAppMatchEnquiryStartPage();
+    }
+
+    public void closeCookiesBanner(){
+        if (cookies.isDisplayed()){
+            $("[data-cookiefirst-action='accept']").click();
+        }
     }
 
 }

@@ -1,35 +1,36 @@
 package pages;
 
-import static com.codeborne.selenide.Selectors.*;
-
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class ConsumerAppDirectoryPage {
 
-    public ConsumerAppDirectoryPage selectAdviserTypeFilterOption(String cssSelector){
-        $(".v-select__selections").shouldHave(Condition.text("Financial adviser")).click();
-        $(byXpath(cssSelector)).click();
-        return this;
-    }
-    public ConsumerAppDirectoryPage selectAdviceAreaFilterOption(String xPathSelector){
+    public ConsumerAppDirectoryPage selectAdviceAreaFilterOption(String xPathSelector) {
         $(byXpath(xPathSelector)).click();
         return this;
     }
 
-    public ConsumerAppDirectoryPage selectAssetsValueFilterOption(String xPathSelector){
+    public ConsumerAppDirectoryPage selectAssetsValueFilterOption(String xPathSelector) {
         $(byXpath(xPathSelector)).click();
         return this;
     }
 
-    public ConsumerAppDirectoryPage setPostcodeFilter(String poscode){
+    public ConsumerAppDirectoryPage setPostcodeFilter(String poscode) {
         $("#filter-select-postcode").setValue(poscode);
         return this;
     }
 
-    public void clickFindAdviserButton(){
-        $("#filter-submit-button > .v-btn__content").click();
+    public ConsumerAppDirectoryPage clickFindAdviserButton() {
+        $("#filter-submit-button").click();
+        return this;
+    }
+
+    public ElementsCollection getSearchResultsCompanyNames() {
+        return $$("#directory-search-results h2 span");
     }
 
 }
