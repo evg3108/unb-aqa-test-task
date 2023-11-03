@@ -1,13 +1,15 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import utils.DirectorySearchResultsPagination;
 
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class ConsumerAppDirectoryPage {
+
+    DirectorySearchResultsPagination pagination = new DirectorySearchResultsPagination();
 
     public ConsumerAppDirectoryPage selectAdviceAreaFilterOption(String xPathSelector) {
         $(byXpath(xPathSelector)).click();
@@ -29,8 +31,15 @@ public class ConsumerAppDirectoryPage {
         return this;
     }
 
-    public ElementsCollection getSearchResultsCompanyNames() {
-        return $$("#directory-search-results h2 span");
+    public ElementsCollection getCompanyNamesFromAllSearchResults() {
+        ElementsCollection results = $$("#directory-search-results h2 span");
+        if (pagination.doExist()){
+            do{
+                pagination.goToNextPage();
+                results.addAll($$("#directory-search-results h2 span"));
+            } while (pagination.hasNextPage());
+        }
+        return results;
     }
 
 }
