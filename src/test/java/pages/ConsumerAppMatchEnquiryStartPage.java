@@ -1,7 +1,7 @@
 package pages;
 
-import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.*;
 
 public class ConsumerAppMatchEnquiryStartPage {
 
