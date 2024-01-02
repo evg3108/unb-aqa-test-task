@@ -11,11 +11,10 @@ public class ConsumerAppHomePage {
     private final String STAGING_URL = "https://www-staging.unbiased.team/";
     private final String PROD_URL = "https://unbiased.co.uk/";
 
-    private SelenideElement cookies = $("[data-cookiefirst-widget='box']");
+    private final SelenideElement cookies = $("[data-cookiefirst-widget='box']");
 
     public ConsumerAppHomePage openPage(){
         open(STAGING_URL);
-        closeCookiesBanner();
         return this;
     }
 
@@ -24,10 +23,11 @@ public class ConsumerAppHomePage {
         return new ConsumerAppMatchEnquiryStartPage();
     }
 
-    public void closeCookiesBanner() {
+    public ConsumerAppHomePage closeCookiesBanner() {
         if (cookies.isDisplayed()){
             $("[data-cookiefirst-action='accept']").click();
         }
+        return this;
     }
 
 }

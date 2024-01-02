@@ -27,7 +27,7 @@ public class ConsumerAppDirectoryPage {
         return this;
     }
 
-    public ConsumerAppDirectoryPage clickFindAdviserButton() {
+    public ConsumerAppDirectoryPage clickSubmitButton() {
         $("#filter-submit-button").click();
         return this;
     }

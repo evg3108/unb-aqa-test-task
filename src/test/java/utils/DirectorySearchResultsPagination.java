@@ -20,24 +20,14 @@ public class DirectorySearchResultsPagination {
         return $x("//span[contains(.,'Previous page')]");
     }
 
-    public DirectorySearchResultsPagination goToNextPage() {
-        nextPageButton().toWebElement().click();
-        return this;
+    public void goToNextPage() {
+        nextPageButton().click();
     }
 
-    public DirectorySearchResultsPagination goToPreviousPage() {
-        if (hasPreviousPage()) previousPageButton().click();
-        return this;
-    }
-
+    // ElementClickInterceptedException is thrown when using the nextPageButton so replaced with separate selector
     public boolean hasNextPage() {
         nextPageButton().scrollIntoView(true);
         return $("[aria-label='Next page']").isEnabled();
     }
-
-    public boolean hasPreviousPage() {
-        return $("ul.v-pagination button[aria-label=\"Previous page\"]").isEnabled();
-    }
-
 
 }
