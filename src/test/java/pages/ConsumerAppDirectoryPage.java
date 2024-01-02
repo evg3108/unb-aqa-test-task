@@ -1,6 +1,6 @@
 package pages;
 
-import utils.DirectorySearchResultsPagination;
+import elements.DirectorySearchResultsPagination;
 
 import java.util.ArrayList;
 import java.util.List;
