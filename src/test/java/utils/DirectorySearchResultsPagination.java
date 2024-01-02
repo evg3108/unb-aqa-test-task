@@ -3,25 +3,25 @@ package utils;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class DirectorySearchResultsPagination {
 
+
+    public boolean exists() {
+        return $("[aria-label='Pagination Navigation']").exists();
+    }
+
     private SelenideElement nextPageButton() {
-        return $("ul.v-pagination button[aria-label=\"Next page\"]");
+        return $x("//span[contains(.,'Next page')]");
     }
 
     private SelenideElement previousPageButton() {
-        return $("ul.v-pagination button[aria-label=\"Previous page\"]");
-    }
-
-    public boolean doExist() {
-        if (!$("ul.v-pagination").isDisplayed()){
-        }
-        return $("ul.v-pagination").isDisplayed();
+        return $x("//span[contains(.,'Previous page')]");
     }
 
     public DirectorySearchResultsPagination goToNextPage() {
-        if (hasNextPage()) nextPageButton().click();
+        nextPageButton().toWebElement().click();
         return this;
     }
 
@@ -31,11 +31,13 @@ public class DirectorySearchResultsPagination {
     }
 
     public boolean hasNextPage() {
-        return $("ul.v-pagination button[aria-label=\"Next page\"]").isEnabled();
+        nextPageButton().scrollIntoView(true);
+        return $("[aria-label='Next page']").isEnabled();
     }
 
-    public boolean hasPreviousPage(){
+    public boolean hasPreviousPage() {
         return $("ul.v-pagination button[aria-label=\"Previous page\"]").isEnabled();
     }
+
 
 }

@@ -12,8 +12,9 @@
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <selenide.version>6.17.1</selenide.version>
+        <selenide.version>7.0.4</selenide.version>
         <junit.version>5.10.0</junit.version>
+        <assertj.core.version>3.23.1</assertj.core.version>
     </properties>
 
     <dependencies>
@@ -21,13 +22,6 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 

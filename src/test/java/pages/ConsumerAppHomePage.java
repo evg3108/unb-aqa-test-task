@@ -24,7 +24,7 @@ public class ConsumerAppHomePage {
         return new ConsumerAppMatchEnquiryStartPage();
     }
 
-    public void closeCookiesBanner(){
+    public void closeCookiesBanner() {
         if (cookies.isDisplayed()){
             $("[data-cookiefirst-action='accept']").click();
         }

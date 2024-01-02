@@ -1,11 +1,12 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
 import utils.DirectorySearchResultsPagination;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ConsumerAppDirectoryPage {
 
@@ -21,8 +22,8 @@ public class ConsumerAppDirectoryPage {
         return this;
     }
 
-    public ConsumerAppDirectoryPage setPostcodeFilter(String poscode) {
-        $("#filter-select-postcode").setValue(poscode);
+    public ConsumerAppDirectoryPage setPostcodeFilter(String postcode) {
+        $("#filter-select-postcode").setValue(postcode);
         return this;
     }
 
@@ -31,15 +32,25 @@ public class ConsumerAppDirectoryPage {
         return this;
     }
 
-    public ElementsCollection getCompanyNamesFromAllSearchResults() {
-        ElementsCollection results = $$("#directory-search-results h2 span");
-        if (pagination.doExist()){
-            do{
+    public List<String> getCompanyNamesFromAllSearchResults() {
+        List<String> results = new ArrayList<>(collectCompanyNamesFromCurrentPage());
+        if (pagination.exists()) {
+            do {
                 pagination.goToNextPage();
-                results.addAll($$("#directory-search-results h2 span"));
+                results.addAll(collectCompanyNamesFromCurrentPage());
             } while (pagination.hasNextPage());
         }
         return results;
+    }
+
+    private List<String> collectCompanyNamesFromCurrentPage() {
+        scrollToEndOfContent();
+        return $$("#directory-search-results h2 span").texts();
+    }
+
+    private void scrollToEndOfContent() {
+        $("#directory-search-results").scrollIntoView(false);
+        sleep(1000);
     }
 
 }
