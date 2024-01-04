@@ -1,24 +1,26 @@
 package pages;
 
-import elements.DirectorySearchResultsPagination;
+import components.DirectorySearchResultsPagination;
+import enums.AdviceArea;
+import enums.AssetsValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ConsumerAppDirectoryPage {
 
     DirectorySearchResultsPagination pagination = new DirectorySearchResultsPagination();
 
-    public ConsumerAppDirectoryPage selectAdviceAreaFilterOption(String xPathSelector) {
-        $(byXpath(xPathSelector)).click();
+    public ConsumerAppDirectoryPage selectAdviceAreaFilterOption(AdviceArea adviceAreaFilter) {
+        $("#list-34").find(withText(adviceAreaFilter.filterText)).click();
         return this;
     }
 
-    public ConsumerAppDirectoryPage selectAssetsValueFilterOption(String xPathSelector) {
-        $(byXpath(xPathSelector)).click();
+    public ConsumerAppDirectoryPage selectAssetsValueFilterOption(AssetsValue assetsValueFilter) {
+        $("#list-44").find(withText(assetsValueFilter.filterText)).click();
         return this;
     }
 
