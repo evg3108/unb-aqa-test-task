@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import enums.AdviceArea;
 import enums.AssetsValue;
 import org.junit.jupiter.api.DisplayName;
@@ -34,6 +35,8 @@ public class DirectorySearchTest {
                                                                   AssetsValue assetsValue,
                                                                   String postcode,
                                                                   String expectedCompanyName) {
+        Configuration.headless = true;
+
         List<String> searchResults = new ConsumerAppHomePage().openPage().closeCookiesBanner()
                 .clickFIFAButton()
                 .clickBrowseAdviserDirectory()
